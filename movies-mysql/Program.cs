@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<moviesContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("moviesContext"), 
+        new MySqlServerVersion(new Version())));
 
 var app = builder.Build();
 
